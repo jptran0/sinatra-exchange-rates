@@ -1,0 +1,13 @@
+<h1>Convert <%= @symbol %></h1>
+
+<div>
+  Go <a href="/">back</a>.
+</div>
+
+<ul>
+  <% @symbols.each do |symbol| %>
+    <li>
+      <a href="/<%= @symbol %>/<%= symbol %>">Convert 1 <%= @symbol %> to <%= symbol %>...</a>
+    </li>
+  <% end %>
+</ul>
