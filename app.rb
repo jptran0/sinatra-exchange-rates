@@ -23,5 +23,10 @@ end
 get("/:symbol/:conversion") do
   @symbol = params.fetch("symbol")
   @conversion = params.fetch("conversion")
+
+  raw_conversion = HTTP.get("https://api.exchangerate.host/convert?from=#{@symbol}&to=#{@conversion}")
+  parsed_conversion = JSON.parse(raw_conversion)
+  @rate = parsed_conversion.fetch("result")
+
   erb(:third_step)
 end
