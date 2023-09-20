@@ -3,19 +3,26 @@ require "sinatra/reloader"
 require "http"
 require "json"
 
-raw_data= HTTP.get("https://api.exchangerate.host/symbols")
-parsed_data = JSON.parse(raw_data)
+
+def currencies
+  raw_data= HTTP.get("https://api.exchangerate.host/symbols")
+  parsed_data = JSON.parse(raw_data)
+  currency_keys = parsed_data.fetch("symbols").keys
+
+  return currency_keys
+
+end
 
 get("/") do
-  @symbols = parsed_data.fetch("symbols").keys
+  @symbols = currencies
   
   erb(:home)
 end
 
 get("/:symbol") do
-  @symbol = params.fetch("symbol")
+  @symbol = params.fetch("symbol") 
 
-  @symbols = parsed_data.fetch("symbols").keys
+  @symbols = currencies
 
   erb(:second_step)
 end

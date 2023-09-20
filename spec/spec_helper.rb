@@ -31,11 +31,11 @@ RSpec.configure do |config|
   config.before(:each) do
     stub_request(:get, /api.exchangerate.host\/symbols/).
       with(headers: { "Accept" => "*/*", "User-Agent" => "Ruby" }).
-      to_return(status: 200, body: api_response, headers: {})
+      to_return(status: 200, body: api_response, headers: { "Content-Type" => "application/json" })
 
     stub_request(:get, /api.exchangerate.host\/symbols/).
       with(headers: { "Connection" => "close", "Host" => "api.exchangerate.host", "User-Agent" => "http.rb/#{HTTP::VERSION}" }).
-      to_return(status: 200, body: api_response, headers: {})
+      to_return(status: 200, body: api_response, headers: { "Content-Type" => "application/json" })
   end
 end
 path_to_file = Dir.pwd + "/spec/support/cup_to_svc.json"
@@ -44,19 +44,19 @@ RSpec.configure do |config|
   config.before(:each) do
     stub_request(:get, /api.exchangerate.host\/convert/).
       with(headers: { "Accept" => "*/*", "User-Agent" => "Ruby" }).
-      to_return(status: 200, body: cup_to_svc, headers: {})
+      to_return(status: 200, body: cup_to_svc, headers: { "Content-Type" => "application/json" })
 
     stub_request(:get, /api.exchangerate.host\/latest/).
       with(headers: { "Accept" => "*/*", "User-Agent" => "Ruby" }).
-      to_return(status: 200, body: cup_to_svc, headers: {})
+      to_return(status: 200, body: cup_to_svc, headers: { "Content-Type" => "application/json" })
 
     stub_request(:get, /api.exchangerate.host\/convert/).
       with(headers: { "Connection" => "close", "Host" => "api.exchangerate.host", "User-Agent" => "http.rb/#{HTTP::VERSION}" }).
-      to_return(status: 200, body: cup_to_svc, headers: {})
+      to_return(status: 200, body: cup_to_svc, headers: { "Content-Type" => "application/json" })
 
     stub_request(:get, /api.exchangerate.host\/latest/).
       with(headers: { "Connection" => "close", "Host" => "api.exchangerate.host", "User-Agent" => "http.rb/#{HTTP::VERSION}" }).
-      to_return(status: 200, body: cup_to_svc, headers: {})
+      to_return(status: 200, body: cup_to_svc, headers: { "Content-Type" => "application/json" })
   end
 end
 
